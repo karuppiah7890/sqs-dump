@@ -6,4 +6,4 @@ sqs-dump
 
 *.tar.gz
 
-messages.json
+*.json
