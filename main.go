@@ -70,7 +70,7 @@ func main() {
 					log.Fatalf("error occurred while getting serializing message from sqs queue: %v", err)
 				}
 
-				if _, err = f.Write(messageJson); err != nil {
+				if _, err = f.WriteString(string(messageJson) + "\n"); err != nil {
 					log.Fatalf("error occurred while writing message from sqs queue into file: %v", err)
 				}
 
