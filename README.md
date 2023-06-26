@@ -20,4 +20,4 @@ make
 
 #### AWS credentials
 
-Create an IAM user which has access to `sqs:GetQueueAttributes` and `sqs:ReceiveMessage`
+Create an IAM user which has access to `sqs:ReceiveMessage`
