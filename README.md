@@ -14,7 +14,7 @@ make
 ./sqs-dump
 ```
 
-`sqs-dump` is just a simple tool and it keeps running and writes messages to `messages.json` file
+`sqs-dump` is just a simple tool and it keeps running and writes messages to `messages.json` file. If you want to stop it from running, just press `Ctrl + C`
 
 ### Setup
 
