@@ -1,0 +1,9 @@
+sqs-dump
+
+*.env*
+
+!.env.sample
+
+*.tar.gz
+
+messages.json
