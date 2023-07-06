@@ -12,6 +12,7 @@ import (
 
 	awsconf "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 )
 
 // TODO: Write tests for all of this
@@ -96,6 +97,12 @@ type Message struct {
 	// handle is returned every time you receive a message. When deleting a message,
 	// you provide the last received receipt handle to delete the message.
 	ReceiptHandle string `json:"receipt_handle"`
+
+	// Each message attribute consists of a Name, Type, and Value. For more
+	// information, see Amazon SQS message attributes
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
+	// in the Amazon SQS Developer Guide.
+	MessageAttributes map[string]types.MessageAttributeValue `json:"message_attributes"`
 }
 
 // Get message from the queue
@@ -114,10 +121,11 @@ func getMessagesFromQueue(queueUrl string, sqsClient *sqs.Client) ([]*Message, e
 
 	for _, outputMessage := range output.Messages {
 		message := Message{
-			Body:          *outputMessage.Body,
-			MD5OfBody:     *outputMessage.MD5OfBody,
-			MessageId:     *outputMessage.MessageId,
-			ReceiptHandle: *outputMessage.ReceiptHandle,
+			Body:              *outputMessage.Body,
+			MD5OfBody:         *outputMessage.MD5OfBody,
+			MessageId:         *outputMessage.MessageId,
+			ReceiptHandle:     *outputMessage.ReceiptHandle,
+			MessageAttributes: outputMessage.MessageAttributes,
 		}
 
 		messages = append(messages, &message)
