@@ -108,8 +108,9 @@ type Message struct {
 // Get message from the queue
 func getMessagesFromQueue(queueUrl string, sqsClient *sqs.Client) ([]*Message, error) {
 	input := sqs.ReceiveMessageInput{
-		QueueUrl:            &queueUrl,
-		MaxNumberOfMessages: 10,
+		QueueUrl:              &queueUrl,
+		MaxNumberOfMessages:   10,
+		MessageAttributeNames: []string{"All"},
 	}
 
 	output, err := sqsClient.ReceiveMessage(context.TODO(), &input)
